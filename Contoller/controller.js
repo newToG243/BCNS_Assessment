@@ -36,7 +36,7 @@ const updateTask = async (req, res) => {
             // If the task is already completed,we can not mark it false;
             req.body.Completed = true;
         }
-        
+
         const task = await Task.findByIdAndUpdate(taskID, req.body, { new: true, runValidators: true });
 
         res.status(200).json({ data: task, msg: "Task updated successfully" });
@@ -45,29 +45,7 @@ const updateTask = async (req, res) => {
     }
 }
 
-// const getAllTask = async (req, res) => {
-//     try {
-//         const { Title, Category, Sort } = req.query;
-//         const queryObj = {}
-//         if (Title) {
-//             queryObj.Title = Title;
-//         }
-//         if (Category) {
-//             queryObj.Category = Category;
-//         }
-//         let result = await Task.find(queryObj)
-//         if (Sort) {
-//             const sortList = await Sort.split(',').join(' ');
-//             result =await result.sort(sortList);
-//         } else {
-//             result = result.sort((a, b) => a.Category - b.Category);
-//         }
 
-//         res.status(200).json({ data: result, totalResult: result.length })
-//     } catch (error) {
-//         res.status(500).json({ success: false, error: error.message });
-//     }
-// }
 const getAllTask = async (req, res) => {
     try {
         const { Title, Category, sort } = req.query;
